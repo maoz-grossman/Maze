@@ -10,7 +10,7 @@ public class Graph {
 
 
 	//-----------------//
-	// 	Graph methods  //
+	//  Graph methods  //
 	//-----------------//
 
 	// adjacent vertices list 
