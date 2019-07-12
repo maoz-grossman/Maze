@@ -74,15 +74,16 @@ public class BFS {
 
 
 	public String Get_path(Vertex v,char[][]maze) {
+		char path_sign='.';
 		String path="";
 		Vertex par=parent[v.name];
 		if(par==null)return "No path from source to v";
 		path+=par.name+"->"+v.name;
-		maze[par.i][par.j]='.';
+		maze[par.i][par.j]=path_sign;
 		while(source.name!=par.name) {
 			par=parent[par.name];
 			path=par.name+"->"+path;
-			maze[par.i][par.j]='.';
+			maze[par.i][par.j]=path_sign;
 		}
 		return path;
 	}
