@@ -16,7 +16,7 @@ public class Graph {
 	// adjacent vertices list 
 	public Vector<LinkedList<Vertex>> Adj;
 
-	public Graph(int graph[][]) {
+	public Graph(int graph[][],int scip) {
 		Adj= new Vector<LinkedList<Vertex>>();
 		for (int i = 0; i < graph.length; i++) {
 			for (int j = 0; j < graph[0].length; j++) {
@@ -24,18 +24,20 @@ public class Graph {
 					LinkedList<Vertex> list= new LinkedList<>();
 					Vertex v= new Vertex(graph[i][j],i,j);
 					list.add(v);
-					getNeghibors(list, graph, i, j);
+					getNeighbors(list, graph,v, i, j,scip);
 					Adj.add(list);
 				}
 			}
 
 		}
 	}
-
-	private void getNeghibors(LinkedList<Vertex> list,int graph[][],int i,int j) {
+	
+	
+	private void getNeighbors(LinkedList<Vertex> list,int graph[][],Vertex pre,int i,int j,int skip) {
 		try {
-			if(graph[i-1][j]>=0) {
-				Vertex v= new Vertex(graph[i-1][j],i-1,j);
+			if(graph[i-skip][j]>=0) {
+				Vertex v= new Vertex(graph[i-skip][j],i-skip,j);
+				v.pre=pre;
 				list.add(v);
 			}	
 
@@ -44,8 +46,9 @@ public class Graph {
 			
 		}
 		try {
-			if(graph[i+1][j]>=0) {
-				Vertex v= new Vertex(graph[i+1][j],i+1,j);
+			if(graph[i+skip][j]>=0) {
+				Vertex v= new Vertex(graph[i+skip][j],i+skip,j);
+				v.pre=pre;
 				list.add(v);
 			}	
 		}
@@ -53,8 +56,9 @@ public class Graph {
 			
 		}
 		try {
-			if(graph[i][j-1]>=0) {
-				Vertex v= new Vertex(graph[i][j-1],i,j-1);
+			if(graph[i][j-skip]>=0) {
+				Vertex v= new Vertex(graph[i][j-skip],i,j-skip);
+				v.pre=pre;
 				list.add(v);
 			}	
 		}
@@ -62,8 +66,9 @@ public class Graph {
 			
 		}
 		try {
-			if(graph[i][j+1]>=0) {
-				Vertex v= new Vertex(graph[i][j+1],i,j+1);
+			if(graph[i][j+skip]>=0) {
+				Vertex v= new Vertex(graph[i][j+skip],i,j+skip);
+				v.pre=pre;
 				list.add(v);
 			}	
 		}
