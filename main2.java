@@ -24,7 +24,7 @@ public class main2 {
 
 	int[][]mazename=Maze.Vertecies_name(maze,Start,End,Block);
 
-	Graph g= new Graph(mazename);
+	Graph g= new Graph(mazename,1);
 
 	Vertex _s= Maze.get_start_point();
 	BFS bfs=new BFS(g, _s);
