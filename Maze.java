@@ -7,7 +7,7 @@ public class Maze {
 	private static Vertex start;
 	private static Vertex end;
 
-
+	//builds a maze
 	public static int[][] Vertecies_name(char[][]mazeMatrix, char start_char,char end_char,char block_char){
 		block_sign=block_char;
 		start_sign=start_char;
@@ -31,8 +31,13 @@ public class Maze {
 		return NameOfvertex;
 	}
 	
-	public static char[][] get_random_maze(int hight,int width,char block){
-		block_sign=block;
+	
+	/**
+	 * Randomizes a maze using random Prim's algorithm;
+	 */
+	public static char[][] get_random_maze(int hight,int width,char start_char,char end_char,char block_char){
+		Prim.set_signs(start_char, end_char);
+		start_sign=start_char; end_sign=end_char; block_sign=block_char;
 		char[][]maze=new char[hight][width];
 		for (int i = 0; i < maze.length; i++) {
 			for (int j = 0; j < maze[0].length; j++) {
@@ -46,15 +51,19 @@ public class Maze {
 		for (int i = 0; i < graph.length; i++) {
 			for (int j = 0; j < graph[0].length; j++) {
 				graph[i][j]=index++;
+				
 			}
 		}
-		Graph G =new Graph(graph);
-		Prim.primMaze(G, maze);
+		
+		Graph G =new Graph(graph,1);
+		Prim.primMaze(G,graph,maze);
 		return maze;
 		
 	}
 	
 	
+	
+
 	public static Vertex get_start_point() {
 		return start;
 	}
@@ -62,6 +71,7 @@ public class Maze {
 	public static Vertex get_end_point() {
 		return end;
 	}
+	
 	
 	public static void printMaze(char[][]maze) {
 		for (int i = 0; i < maze.length; i++) {
